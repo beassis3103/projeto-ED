@@ -1,8 +1,9 @@
 public class Torre{
     // atributos
-    private Disco[] discos;
+    public Disco[] discos;
     private int topo;
     private int tamanho;
+    public String elementos[];
     // construtores
     public Torre(int tamanho) throws Exception{
         if(tamanho <= 1){
@@ -26,9 +27,12 @@ public class Torre{
             throw new Exception("Essa torre já está cheia!");
     }
 
-    public T pop() throws Exception{
-        if (!this.isEmpty())
-            return discos[topo--];
+    public String pop() throws Exception{
+        if (!this.isEmpty()){
+            String temp = this.elementos[topo];
+            topo--;
+            return temp;
+        }
         else
             throw new Exception("Essa torre está vazia!");
     }

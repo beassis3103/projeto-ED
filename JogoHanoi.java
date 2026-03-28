@@ -14,6 +14,41 @@ public class JogoHanoi {
             Torre t1 = new Torre(qtd);
             Torre t2 = new Torre(qtd);
             Torre t3 = new Torre(qtd);
+            if(escolha== 4){
+                System.out.println("Obrigada por jogar!!");
+                System.exit(0);
+            }
+            for (int i = 1; i <= qtd; i++){
+                    String original = "*";
+                    String repete = original.repeat(i);
+                    Disco disco_atual = new Disco(i);
+                    t1.push(disco_atual);
+            }
+            switch(escolha){
+                case 1:
+                    System.out.println("Digite a torre de origem: ");
+                    int origem = entrada.nextInt();
+                    System.out.println("Digite a torre de destino: ");
+                    int destino = entrada.nextInt();
+                    if (disco_atual.getTamanho() > t2.discos[t2.topo].getTamanho() || disco_atual.getTamanho() > t3.discos[t3.topo].getTamanho()){
+                        throw new InvalidMovementException("Movimento inválido! Você não pode colocar um disco maior em cima de um menor.");
+                    }
+                    if (origem == 1 && destino == 2){
+                        t2.push(t1.pop());
+                    }else if (origem == 1 && destino == 3){
+                        t3.push(t1.pop());
+                    }else if (origem == 2 && destino == 1){
+                        t1.push(t2.pop());
+                    }else if (origem == 2 && destino == 3){
+                        t3.push(t2.pop());
+                    }else if (origem == 3 && destino == 1){
+                        t1.push(t3.pop());
+                    }else if (origem == 3 && destino == 2){ 
+                        t2.push(t3.pop());
+                    }else{
+                        throw new InvalidMovementException("Movimento inválido! As torres são numeradas de 1 a 3.");
+                    }
+            }
             if (escolha == 4){
                 System.out.println("Obrigado por jogar!");
                 System.exit(0);
@@ -34,11 +69,9 @@ public class JogoHanoi {
                 System.out.println("Reiniciando jogo...");
                 main(args);
             }
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-            System.out.println("Tente novamente.\n");
-            System.out.println("Menu:\n 1-Mover Disco\n 2-Mostrar Torres\n 3-Reiniciar Jogo\n 4- Sair");
-            escolha = entrada_escolha.nextInt();
+        }catch (TooSmallException | IsFullException | IsEmptyException | InvalidMovementException e){
+            System.out.println("ERRO: " +e.getMessage());
+
         }
     }
 }

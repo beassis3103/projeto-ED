@@ -15,29 +15,32 @@ public class Torre{
         return this.tam_disco;
     }
 
-    public void inicializarDiscos(int qtd) throws Exception{
-        if (qtd <= 1){
-            throw new TooSmallException("A quantidade de discos deve ser maior que um(1).");
-        }
+    public void inicializarDiscos(int qtd) throws IsFullException{
         for(int i = 1; i <= qtd; i++){
             String original = "*";
             String repete = original.repeat(i);
             System.out.println(repete);
-            Disco disco_atual = new Disco(i);
+            Disco disco_atual = new Disco(i, 0);
+            if(tam_disco.isFull()){
+                throw new IsFullException("A torre está cheia, não é possível adicionar mais discos.");
+            }
             tam_disco.push(disco_atual);
         }
     }
 
-    public Disco pop() throws Exception{
+    public Disco pop() throws IsEmptyException{
         if (tam_disco.isEmpty()){
-            throw new Exception("A torre está vazia, não é possível retirar um disco.");
+            throw new IsEmptyException("A torre está vazia, não é possível retirar um disco.");
         }
         return tam_disco.pop();
     }
 
-    public Disco push(Disco disco) throws Exception{
+    public Disco push(Disco disco) throws InvalidMovementException, IsFullException, IsEmptyException{
         if (!tam_disco.isEmpty() && disco.getTamanho() > tam_disco.topo().getTamanho()){
             throw new InvalidMovementException("Movimento inválido! Você não pode colocar um disco maior em cima de um menor.");
+        }
+        if(tam_disco.isFull()){
+            throw new IsFullException("A torre está cheia, não é possível adicionar mais discos.");
         }
         tam_disco.push(disco);
         return disco;

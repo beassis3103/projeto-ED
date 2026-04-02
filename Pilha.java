@@ -3,6 +3,9 @@ public class Pilha <T> {
     private static final int TAM_DEFAULT = 100;
     private	int topo;
     private	T elementos[ ];
+    public T getElementos(int i) {
+        return elementos[i];
+    }
     public	Pilha(int tamanho) {
         this.elementos = (T[]) new Object[tamanho];
         this.topo = -1;
@@ -19,18 +22,18 @@ public class Pilha <T> {
         return this.topo == this.elementos.length-1;
     }
 
-    public void push(T e) throws Exception{
+    public void push(T e) throws IsFullException{
         if (!this.isFull( ))
             this.elementos[++this.topo] = e;
         else
-            throw new Exception("Overflow - Estouro de Pilha");
+            throw new IsFullException("Overflow - Estouro de Pilha");
     }
 
-    public T pop() throws Exception{
+    public T pop() throws IsEmptyException{
         if (!this.isEmpty( ))
             return this.elementos[this.topo--];
         else{
-            throw new Exception( "Underflow - Esvaziamento de Pilha");
+            throw new IsEmptyException( "Underflow - Esvaziamento de Pilha");
         }
     }
 

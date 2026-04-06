@@ -5,9 +5,9 @@ public class Torre{
     //Construtor
     public Torre(int qtd){
         this.tam_disco = new Pilha<>(qtd);
+
     }
-   
-    //Métodos
+
     public Pilha<Disco> getTam_disco() {
         return this.tam_disco;
     }
@@ -16,6 +16,7 @@ public class Torre{
         return this.tam_disco;
     }
 
+    //Métodos
     public void inicializarDiscos(int qtd) throws IsFullException{
         for(int i = 1; i <= qtd; i++){
             String original = "*";
@@ -52,6 +53,10 @@ public class Torre{
             throw new IsEmptyException("A torre está vazia, não é possível obter o topo.");
         }
         return this.tam_disco.topo();
+    }
+
+    public boolean isEmpty() {
+        return this.tam_disco.isEmpty();
     }
 }
 

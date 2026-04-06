@@ -6,6 +6,7 @@ public class Pilha <T> {
     public T getElementos(int i) {
         return elementos[i];
     }
+    @SuppressWarnings("unchecked")
     public	Pilha(int tamanho) {
         this.elementos = (T[]) new Object[tamanho];
         this.topo = -1;

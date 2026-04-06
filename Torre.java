@@ -1,12 +1,13 @@
 public class Torre{
-    // atributos
+    //Atributo
     private final Pilha<Disco> tam_disco;
 
-    // construtor
+    //Construtor
     public Torre(int qtd){
         this.tam_disco = new Pilha<>(qtd);
     }
    
+    //Métodos
     public Pilha<Disco> getTam_disco() {
         return this.tam_disco;
     }

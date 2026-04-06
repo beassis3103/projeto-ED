@@ -1,6 +1,6 @@
 public class Disco{
-    private final int qtd;
-    private int contador_disco;
+    private final int qtd; //Constante do tamanho do disco
+    private int contador_disco; //
     public Disco(int tam_disco, int contador_disco){
         this.qtd = tam_disco;
         this.contador_disco = contador_disco;
